@@ -9,6 +9,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -33,5 +39,28 @@ public class SecurityConfig {
 				.csrf(AbstractHttpConfigurer::disable)
 				.build();
 	}
+
+	@Bean
+	UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
+		UserDetails ivan = User.builder()
+				.username("ivan")
+				.password(passwordEncoder.encode("ivan"))
+				.roles("USER")
+				.build();
+
+		UserDetails anna = User.builder()
+				.username("anna")
+				.password(passwordEncoder.encode("anna"))
+				.roles("USER", "ADMIN")
+				.build();
+
+		return new InMemoryUserDetailsManager(ivan, anna);
+	}
+
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
 
 }
