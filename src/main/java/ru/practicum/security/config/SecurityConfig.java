@@ -1,5 +1,6 @@
 package ru.practicum.security.config;
 
+import com.vaadin.flow.spring.security.RequestUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -62,5 +63,43 @@ public class SecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 
+	@Bean
+	@Order(2)
+	public SecurityFilterChain uiSecurityFilterChain(HttpSecurity http, RequestUtil requestUtil) throws Exception {
+		return http
+				// правила доступа к страницам интерфейса
+				.authorizeHttpRequests(auth -> auth
+						.requestMatchers(
+								"/",
+								"/login",
+								"/VAADIN/**",
+								"/frontend/**",
+								"/icons/**",
+								"/images/**",
+								"/line-awesome/**",
+								"/favicon.ico",
+								"/manifest.webmanifest",
+								"/sw.js",
+								"/offline.html"
+						).permitAll()
+						.requestMatchers("/admin").hasRole("ADMIN")
+						.requestMatchers("/tasks").hasRole("USER")
+						.anyRequest().authenticated()
+				)
+				// настройки страницы входа
+				.formLogin(login -> login
+						.loginPage("/login")
+						.defaultSuccessUrl("/tasks", true)
+						.permitAll()
+				)
+				// настройки выхода
+				.logout(logout -> logout
+						.logoutSuccessUrl("/"))
+				// Для интерфейса на Vaadin нужна ещё CSRF-защита
+				.csrf(csrf -> csrf
+						.ignoringRequestMatchers(requestUtil::isFrameworkInternalRequest)
+				)
+				.build();
+	}
 
 }
