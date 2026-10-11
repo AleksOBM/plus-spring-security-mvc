@@ -1,5 +1,6 @@
 ![Static Badge](https://img.shields.io/badge/Java-21-green)
 ![Static Badge](https://img.shields.io/badge/Spring_Boot-3.3.2-green)
+![Static Badge](https://img.shields.io/badge/Vaadin-24.4.4-blue)
 ![Static Badge](https://img.shields.io/badge/MVC-1a9d66)
 ![Static Badge](https://img.shields.io/badge/SpringSecurity-538681)
 ![Static Badge](https://img.shields.io/badge/Mockito-green)
