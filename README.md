@@ -1,3 +1,10 @@
+![Static Badge](https://img.shields.io/badge/Java-21-green)
+![Static Badge](https://img.shields.io/badge/Spring_Boot-3.3.2-green)
+![Static Badge](https://img.shields.io/badge/Monolith-8A2BE2)
+![Static Badge](https://img.shields.io/badge/SpringSequrity-538681)
+![Static Badge](https://img.shields.io/badge/MVC-1a9d66)
+![Static Badge](https://img.shields.io/badge/Maven-orange)
+
 # Менеджер учебных задач
 
 Учебное Spring MVC-приложение для знакомства с базовыми возможностями Spring Security.
