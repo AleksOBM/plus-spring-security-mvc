@@ -163,9 +163,12 @@ public class AdminView extends VerticalLayout {
 
         stats.removeAll();
         stats.add(
-                UiComponents.statCard(VaadinIcon.USERS, "Пользователей", String.valueOf(users), "blue"),
-                UiComponents.statCard(VaadinIcon.CLOCK, "Задач в работе", String.valueOf(active), "amber"),
-                UiComponents.statCard(VaadinIcon.CHECK_CIRCLE, "Выполнено", String.valueOf(completed), "green")
+                UiComponents.statCard(VaadinIcon.USERS,
+                        "Пользователей", String.valueOf(users), "blue"),
+                UiComponents.statCard(VaadinIcon.CLOCK,
+                        "Задач в работе", String.valueOf(active), "amber"),
+                UiComponents.statCard(VaadinIcon.CHECK_CIRCLE,
+                        "Выполнено", String.valueOf(completed), "green")
         );
 
         tasksGrid.setItems(tasks);

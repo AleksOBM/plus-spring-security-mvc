@@ -40,7 +40,8 @@ public class HomeView extends VerticalLayout {
         title.addClassName("hero-title");
 
         Paragraph text = new Paragraph("Небольшое приложение для работы с задачами. "
-                + "С помощью него удобно изучать, как Spring Security разделяет публичные страницы, "
+                + "С помощью него удобно изучать, " +
+                "как Spring Security разделяет публичные страницы, "
                 + "пользовательские действия и административные возможности.");
         text.addClassName("hero-text");
 
@@ -48,10 +49,12 @@ public class HomeView extends VerticalLayout {
         actions.addClassName("hero-actions");
 
         Button tasks = UiComponents.primaryButton("Открыть мои задачи", VaadinIcon.TASKS);
-        tasks.addClickListener(event -> getUI().ifPresent(ui -> ui.navigate(TasksView.class)));
+        tasks.addClickListener(event -> getUI()
+                .ifPresent(ui -> ui.navigate(TasksView.class)));
 
         Button login = UiComponents.primaryButton("Войти в приложение", VaadinIcon.SIGN_IN);
-        login.addClickListener(event -> getUI().ifPresent(ui -> ui.navigate(LoginView.class)));
+        login.addClickListener(event -> getUI()
+                .ifPresent(ui -> ui.navigate(LoginView.class)));
 
         Button admin = new Button("Администрирование", VaadinIcon.USER_STAR.create(),
                 event -> getUI().ifPresent(ui -> ui.navigate(AdminView.class)));
@@ -81,13 +84,15 @@ public class HomeView extends VerticalLayout {
         Div userCard = UiComponents.card(
                 UiComponents.badge("ROLE_USER", "blue"),
                 new H3("Личные задачи"),
-                new Paragraph("Пользователь видит свои задачи, создаёт новые и отмечает выполненные.")
+                new Paragraph("Пользователь видит свои задачи, " +
+                        "создаёт новые и отмечает выполненные.")
         );
 
         Div adminCard = UiComponents.card(
                 UiComponents.badge("ROLE_ADMIN", "amber"),
                 new H3("Администрирование"),
-                new Paragraph("Администратор управляет задачами пользователей и примерами заданий.")
+                new Paragraph("Администратор управляет задачами пользователей " +
+                        "и примерами заданий.")
         );
 
         return UiComponents.responsiveRow(publicCard, userCard, adminCard);
@@ -97,7 +102,8 @@ public class HomeView extends VerticalLayout {
         Div section = UiComponents.card();
 
         H3 title = new H3("Примеры учебных задач");
-        Paragraph description = new Paragraph("Эти карточки видны без входа. Их удобно использовать "
+        Paragraph description = new Paragraph("Эти карточки видны без входа. " +
+                "Их удобно использовать "
                 + "как публичную часть приложения при проверке правил доступа.");
         description.addClassName("page-description");
 

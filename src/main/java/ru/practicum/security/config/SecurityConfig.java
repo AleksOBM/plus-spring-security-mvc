@@ -2,7 +2,6 @@ package ru.practicum.security.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.spring.security.RequestUtil;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -13,7 +12,6 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -30,7 +28,6 @@ import java.time.Instant;
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 public class SecurityConfig {
 
 	@Bean
@@ -52,9 +49,6 @@ public class SecurityConfig {
 				.exceptionHandling(ex -> ex
 						.authenticationEntryPoint(entryPoint)
 						.accessDeniedHandler(deniedHandler)
-				)
-				.sessionManagement(session -> session
-						.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				)
 				.csrf(AbstractHttpConfigurer::disable)
 				.build();
@@ -79,7 +73,9 @@ public class SecurityConfig {
 
 	@Bean
 	AccessDeniedHandler restAccessDeniedHandler(ObjectMapper objectMapper) {
-		return (request, response, accessDeniedException) -> {
+		return (request,
+		        response,
+		        accessDeniedException) -> {
 			response.setStatus(HttpStatus.FORBIDDEN.value());
 			response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 			response.setContentType(MediaType.APPLICATION_JSON_VALUE);

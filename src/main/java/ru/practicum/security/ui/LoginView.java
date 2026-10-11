@@ -54,8 +54,10 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
     }
 
     private Div createAccountCards() {
-        Div ivan = accountCard("Обычный пользователь", "ivan", "ivan", "ROLE_USER", "blue");
-        Div anna = accountCard("Администратор", "anna", "anna", "ROLE_USER, ROLE_ADMIN", "amber");
+        Div ivan = accountCard("Обычный пользователь", "ivan",
+                "ivan", "ROLE_USER", "blue");
+        Div anna = accountCard("Администратор", "anna",
+                "anna", "ROLE_USER, ROLE_ADMIN", "amber");
 
         Div accounts = new Div(ivan, anna);
         accounts.addClassName("login-accounts");
@@ -101,10 +103,13 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
         NativeLoginForm form = new NativeLoginForm();
         form.add(
                 title,
-                formField("Логин", "username", "text", "Введите логин"),
-                formField("Пароль", "password", "password", "Введите пароль")
+                formField("Логин", "username",
+                        "text", "Введите логин"),
+                formField("Пароль", "password",
+                        "password", "Введите пароль")
         );
-        getCsrfToken().ifPresent(token -> form.add(hiddenInput(token.getParameterName(), token.getToken())));
+        getCsrfToken().ifPresent(token -> form
+                .add(hiddenInput(token.getParameterName(), token.getToken())));
         form.add(errorMessage, submit);
         form.addClassName("login-form");
         return form;
@@ -140,7 +145,9 @@ public class LoginView extends VerticalLayout implements BeforeEnterObserver {
         }
 
         HttpServletRequest request = servletRequest.getHttpServletRequest();
-        return java.util.Optional.ofNullable((CsrfToken) request.getAttribute(CsrfToken.class.getName()));
+        return java.util.Optional.ofNullable(
+                (CsrfToken) request.getAttribute(CsrfToken.class.getName())
+        );
     }
 
     @Tag("form")
